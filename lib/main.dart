@@ -8,52 +8,59 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SplashScreenPage(),
+    return const MaterialApp(
+      home:MyAnimatedSplashScreen(),
     );
   }
 }
 
-class SplashScreenPage extends StatelessWidget {
+class MyAnimatedSplashScreen extends StatelessWidget {
+  const MyAnimatedSplashScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return AnimatedSplashScreen(
-      splash: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset('assets/ipeformlogo.png', height: 100), 
-          Container(
-            child: Column(
-              children: [
-                  CircularProgressIndicator(
-                  color: const Color.fromARGB(255, 141, 89, 0),
-
-          ), // Loading animation
-          // SizedBox(height: 20),
-          Text('Welcome...'), 
-          SizedBox(height: 20),
-              ],
-            )
-          )
+    return Container(
+                width: double.maxFinite,
+                height: double.maxFinite,
+                alignment: Alignment.center,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                        begin: Alignment.bottomCenter,
+                        end: Alignment.center,
+                        colors:[
+                                Color.fromARGB(255, 237, 167, 62),
+                                Color.fromARGB(255, 237, 167, 62),
+                                Colors.white,
+                                ],
+                  ) ,
+                ),
           
-        ],
-      ),
-      nextScreen: HomePage(), 
-      splashTransition: SplashTransition.scaleTransition,
-      backgroundColor: Colors.white, 
-      duration: 10000, 
-    );
+       child: 
+              AnimatedSplashScreen(
+              splash: Image.asset('assets/ipeformlogo.png'),
+              nextScreen: HomePage(),
+              splashTransition: SplashTransition.fadeTransition,
+              duration: 10000,
+              backgroundColor: Colors.transparent,
+              ),
+              
+
+      );
   }
 }
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home Page'),
+        backgroundColor: const Color.fromARGB(255, 237, 167, 62),
+        centerTitle: true,
+        title: const Text('Home Page'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Welcome to your app!'),
       ),
     );
